@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<scrollhide> <!-- This family just disables scrolling and hides the scrollbar, as well as auto-scrolling to the top if needed. -->
+	<style>
+		body {
+			overflow: hidden;
+			min-height: 100%;
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			window.scrollTo(0,0);
+		});
+	</script>
+</scrollhide>
+<bg>
+<div class="taskbarall">
+	<img class="taskbarl" src="background/taskbarl.png" />
+	<img class="taskbarr" src="background/taskbarr.png" />
+	<img class="taskbars" src="background/taskbar.png" />
+</div>
+	<style>
+		.taskbars {
+			position:absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 28px;
+			z-index: 3;
+			}
+		.taskbarl {
+			position:absolute;
+			bottom: 0;
+			left: 0;
+			z-index: 4;
+			}
+		.taskbarr {
+			position:absolute;
+			bottom: 0;
+			right: 0;
+			z-index: 5;
+			}
+	</style>
+<img src="background/deskico.png" style="position:absolute; top:0; left:0; z-index:1;" width="" height="" alt="" />
+</bg>
+<body style="background-color:#008080">
+<div class="windowall">
+	<img class="window" src="main/1.png" />
+	<div class="buttons">
+		<input class="button1" type="button" value=""/>
+	</div>
+</div>
+	<style>
+	/* i love css but jesus fucking christ why is this so stupid */
+		.windowall {
+			display: flex;
+			position:relative;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			min-height: 100vh;
+			z-index: 2;
+			}
+		.window {
+			position:relative;
+			width: 483px;
+			height: 347px;
+			}
+		.button1 {
+			position:absolute;
+			background:url(button/buttonwow.png) no-repeat;
+			cursor: pointer;
+			border: none;
+			outline: none;
+			width: 180px;
+			height: 24px;
+			z-index: 3;
+			}
+		.button1:hover {
+			background:url(button/buttonwowh.png) no-repeat;
+			}
+	</style>
+</body>
+

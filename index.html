@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<scrollhide> <!-- This family just disables scrolling and hides the scrollbar, as well as auto-scrolling to the top if needed. -->
+	<style>
+		body {
+			overflow: hidden;
+			min-height: 100%;
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			window.scrollTo(0,0);
+		});
+	</script>
+</scrollhide>
+<bg>
+<div class="taskbarall">
+	<img class="taskbarl" src="background/taskbarl.png" />
+	<img class="taskbarr" src="background/taskbarr.png" />
+	<img class="taskbars" src="background/taskbar.png" />
+</div>
+	<style>
+		.taskbars {
+			position:absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 56px;
+			z-index: 10;
+			image-rendering: pixelated;
+			}
+		.taskbarl {
+			position:absolute;
+			bottom: 0;
+			left: 0;
+			z-index: 11;
+			height: 56px;
+			image-rendering: pixelated;
+			}
+		.taskbarr {
+			position:absolute;
+			bottom: 0;
+			right: 0;
+			height: 56px;
+			image-rendering: pixelated;
+			z-index: 12;
+			}
+	</style>
+<div class="desktopallall">
+	<img class="deskico" src="background/deskico.png" />
+</div>
+<style>
+	.deskico {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	height: 874px;
+	image-rendering: pixelated;
+	}
+</style>
+</bg>
+<body style="background-color:#008080">
+<div class="windowall">
+	<img class="wingroup" src="window\windowgroup.png" usemap="#contact" width="532" height="250"/>
+	<style>
+	.windowall {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		min-height: 100vh;
+		z-index: 2;
+		}
+	.wingroup {
+		width: 1264px;
+		height: 750px;
+		position: absolute;
+		image-rendering: pixelated;
+	}
+	</style>
+	<map name="contact">
+		<area shape="rect" coords="934,648,1177,669" href="mailto:anakinorleans@gmail.com">
+		<area shape="rect" coords="1008,676,1177,697" target="_blank" href="https://www.linkedin.com/in/anakinorleans/">
+	</div>
+</div>
+</body>
+
