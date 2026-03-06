@@ -1,90 +1,1366 @@
 <!DOCTYPE html>
 <html>
-<scrollhide> <!-- This family just disables scrolling and hides the scrollbar, as well as auto-scrolling to the top if needed. -->
-	<style>
-		body {
-			overflow: hidden;
-			min-height: 100%;
-		}
-	</style>
-	<script type="text/javascript">
-		$(document).ready(function () {
-			window.scrollTo(0,0);
-		});
-	</script>
-</scrollhide>
-<bg>
-<div class="taskbarall">
-	<img class="taskbarl" src="background/taskbarl.png" />
-	<img class="taskbarr" src="background/taskbarr.png" />
-	<img class="taskbars" src="background/taskbar.png" />
-</div>
-	<style>
-		.taskbars {
-			position:absolute;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			height: 56px;
-			z-index: 10;
-			image-rendering: pixelated;
-			}
-		.taskbarl {
-			position:absolute;
-			bottom: 0;
-			left: 0;
-			z-index: 11;
-			height: 56px;
-			image-rendering: pixelated;
-			}
-		.taskbarr {
-			position:absolute;
-			bottom: 0;
-			right: 0;
-			height: 56px;
-			image-rendering: pixelated;
-			z-index: 12;
-			}
-	</style>
-<div class="desktopallall">
-	<img class="deskico" src="background/deskico.png" />
-</div>
+<!-- this was scrapped together from some bulllshiiiiiit 😂😂😂 i gave up on in 2021 -->
+<!-- and yes i will be less than professional in my comments because if -->
+<!-- you are looking at the source for this you can probably handle it -->
+<!-- i hate computers -->
+<!-- enjoy -anakin -->
+<!-- src: https://github.com/AnakinO05/anakino05.github.io -->
+<head>
 <style>
-	.deskico {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	height: 874px;
-	image-rendering: pixelated;
-	}
+#loader {
+	position: fixed;
+	inset: 0;
+	background-color: #008080;
+	z-index: 999;
+	display: flex;
+	align-items: center;
+	font-family: sans-serif;
+	color: white;
+}
 </style>
-</bg>
-<body style="background-color:#008080">
-<div class="windowall">
-	<img class="wingroup" src="window\windowgroup.png" usemap="#contact" width="532" height="250"/>
-	<style>
-	.windowall {
-		display: flex;
-		position: relative;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		min-height: 100vh;
-		z-index: 2;
+    <style>
+		/* global stuff */
+		/* these top two lines disable scrolling and hides the scrollbar */
+		/* as well as auto-scrolling to the top if needed so it look pretty */
+        body {
+            overflow: hidden;
+            min-height: 100%;
+            background-color: #008080;
+            margin: 0;
+        }
+		img {
+			user-select: none;
+			-webkit-user-select: none;
+            image-rendering: pixelated;
 		}
-	.wingroup {
-		width: 1264px;
-		height: 750px;
-		position: absolute;
-		image-rendering: pixelated;
-	}
-	</style>
-	<map name="contact">
-		<area shape="rect" coords="934,648,1177,669" href="mailto:anakinorleans@gmail.com">
-		<area shape="rect" coords="1008,676,1177,697" target="_blank" href="https://www.linkedin.com/in/anakinorleans/">
-	</div>
+
+		/* cursor stuff */
+		html, body, * {
+			cursor: url("cur/98_2x.png"), default;
+		}
+		#aboutme, .wingroup {
+			cursor: url("cur/98_2x.png"), move;
+		}
+		map[name="contact"] area {
+			cursor: url("cur/98pointer_2x.png"), pointer;
+		}
+		/* taskbar stuff */
+        .taskbars {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 56px;
+            z-index: 3;
+        }
+        .taskbarl {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 4;
+            height: 56px;
+        }
+        .taskbarr {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 56px;
+            z-index: 12;
+        }
+
+        /* desktop stuff */
+        .deskico {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            height: 874px;
+        }
+
+        /* window stuff */
+        .windowall {
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+			flex-direction: row;
+			gap: 20px;
+            min-height: 100vh;
+            z-index: 2;
+        }
+
+        .wingroup {
+            position: absolute;
+            touch-action: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="taskbarall">
+    <img class="taskbarl" src="background/taskbarl.png" draggable="false" usemap="#taskbarl"/>
+		<map name="taskbarl">
+		<area shape="rect" coords="4,8,111,51" id="startbutton"/>
+		</map>
+    <img class="taskbarr" src="background/taskbarr.png" draggable="false"/>
+    <img class="taskbars" src="background/taskbar.png" draggable="false"/>
+	<img class="taskbarl_buttons" id="taskbarl_startbutton" src="background/startbutton.png" draggable="false"
+	style="position:absolute; bottom:4px; left:4px; z-index:6; height: 44px;"/>
+	<img class="taskbarl_buttons" id="taskbarl_aboutme" src="background/taskbarl_aboutme1.png" draggable="false"
+	style="position:absolute; bottom:4px; left:306px; z-index:5; height: 44px;"/>
+	<img class="taskbarl_buttons" id="taskbarl_certs" src="background/taskbarl_certs1.png" draggable="false"
+	style="position:absolute; bottom:4px; left:502px; z-index:5; height: 44px;"/>
+	<img class="taskbarl_buttons" id="taskbarl_projects" src="background/taskbarl_projects1.png" draggable="false"
+	style="position:absolute; bottom:4px; left:698px; z-index:5; height: 44px;"/>
+	<img class="taskbarl_buttons" id="taskbarl_contact" src="background/taskbarl_contact1.png" draggable="false"
+	style="position:absolute; bottom:4px; left:894px; z-index:5; height: 44px;"/>
+	<img class="taskbarl_buttons" id="taskbarl_systemprop" src="background/taskbarl_systemprop1.png" draggable="false"
+	style="position:absolute; bottom:4px; left:1090px; z-index:5; height: 44px; display: none;"/>
 </div>
+
+<div class="desktopall">
+    <img class="deskico" src="background/deskico.png" draggable="false"/>
+</div>
+
+<div class="windowall">
+
+	<!-- windows -->
+	<img id="systemprop" class="wingroup" src="window/systemprop.png"
+	width="666" height="488" draggable="false" style="display:none; left:20px; top:20px;" usemap="#systemprop"/>
+		<map name="systemprop">
+		<area shape="rect" coords="624,12,655,39" id="close"/>
+		<area shape="rect" coords="22,62,103,95" id="tab_details"/>
+		<area shape="rect" coords="112,62,229,95" id="tab_advanced"/>
+		</map>
+	<img id="contact" class="wingroup" src="window/contact.png" usemap="#contact" width="532" height="250" draggable="false"/>
+	<!-- alt="Contact Info: If you'd like to contact me for professional inquiry or purposes, please feel free! E-mail me at anakinorleans@gmail.com, or contact me through my LinkedIn profile."/>-->
+		<map name="contact">
+		<area shape="rect" coords="242,140,485,161" href="mailto:anakinorleans@gmail.com" target="_blank"/>
+		<area shape="rect" coords="316,168,485,189" href="https://www.linkedin.com/in/anakinorleans/" target="_blank"/>
+		</map>
+	<img id="projects" class="wingroup" src="window/projects.png" width="618" height="502" draggable="false"/>
+	<img id="certs" class="wingroup" src="window/certs.png" width="562" height="306" draggable="false"/>
+    <img id="aboutme" class="wingroup" src="window/aboutme.png" usemap="#aboutme"
+	width="640" height="278" draggable="false"/>
+		<map name="aboutme">
+		<area shape="rect" coords="600,12,631,39" id="help"/>
+		</map>
+	
+	<!-- titlebars -->
+	<img id="titlebar_aboutme" src="window/titlebar_aboutme.png" draggable="false" style="position:fixed;
+	z-index:9999; pointer-events:none;"/>
+	<img id="titlebar_contact" src="window/titlebar_contact.png" draggable="false" style="position:fixed;
+	z-index:9999; pointer-events:none;"/>
+	<img id="titlebar_projects" src="window/titlebar_projects.png" draggable="false" style="position:fixed;
+	z-index:9999; pointer-events:none;"/>
+	<img id="titlebar_certs" src="window/titlebar_certs.png" draggable="false" style="position:fixed;
+	z-index:9999; pointer-events:none;"/>
+	<img id="titlebar_systemprop" src="window/titlebar_systemprop.png" draggable="false" style="position:fixed;
+	z-index:9999; pointer-events:none; display:none;"/>
+	
+	<!-- buttons -->	
+	<img id="helpbutton" src="window/helpbutton.png" draggable="false"
+	style="position:fixed; z-index:9999; pointer-events:none;"/>
+	<img id="closebutton" src="window/closebutton.png" draggable="false"
+	style="position:fixed; z-index:9999; pointer-events:none; display:none;"/>
+	
+	<!-- Shush! -->
+	<img id="ms_face" src="window/advanced/face_smile.png" draggable="false" style="position:fixed; z-index:9999; pointer-events:none;"/>
+	<img id="ms_c1" src="window/advanced/counter_0.png" draggable="false" style="position:fixed; z-index:9999; pointer-events:none;"/>
+	<img id="ms_c2" src="window/advanced/counter_0.png" draggable="false" style="position:fixed; z-index:9999; pointer-events:none;"/>
+	<img id="ms_c3" src="window/advanced/counter_0.png" draggable="false" style="position:fixed; z-index:9999; pointer-events:none;"/>
+	<img id="ms_t1" src="window/advanced/counter_0.png" draggable="false" style="position:fixed; z-index:9999; pointer-events:none;"/>
+	<img id="ms_t2" src="window/advanced/counter_0.png" draggable="false" style="position:fixed; z-index:9999; pointer-events:none;"/>
+	<img id="ms_t3" src="window/advanced/counter_0.png" draggable="false" style="position:fixed; z-index:9999; pointer-events:none;"/>
+	<div id="ms_tiles"></div>
+</div>
+
+<script type="text/javascript">
+    // more disable scrolling stuff
+	window.scrollTo(0, 0);
+	
+	const titleBar = {
+		"titlebar_contact": { parent: "contact", x: 4, y: 4, w: 524, h: 42,
+		active: "window/titlebar_contact.png", inactive: "window/titlebar_contact_inactive.png" },
+		"titlebar_projects": { parent: "projects", x: 4, y: 4, w: 610, h: 42,
+		active: "window/titlebar_projects.png", inactive: "window/titlebar_projects_inactive.png" },
+		"titlebar_certs": { parent: "certs", x: 4, y: 4, w: 554, h: 42,
+		active: "window/titlebar_certs.png", inactive: "window/titlebar_certs_inactive.png" },
+		"titlebar_aboutme": { parent: "aboutme", x: 4, y: 4, w: 632, h: 42,
+		active: "window/titlebar_aboutme.png", inactive: "window/titlebar_aboutme_inactive.png" },
+		"titlebar_systemprop": { parent: "systemprop", x: 4, y: 4, w: 656, h: 42,
+		active: "window/titlebar_systemprop.png", inactive: "window/titlebar_systemprop_inactive.png" },
+	};
+
+	const windows = ["contact", "projects", "certs", "aboutme", "systemprop"];
+	
+	const taskbarButton = {
+		"aboutme": { el: "taskbarl_aboutme", default: "background/taskbarl_aboutme1.png", 
+		pressed: "background/taskbarl_aboutme2.png", active: "background/taskbarl_aboutme3.png" },
+		"certs": { el: "taskbarl_certs", default: "background/taskbarl_certs1.png", 
+		pressed: "background/taskbarl_certs2.png", active: "background/taskbarl_certs3.png" },
+		"projects": { el: "taskbarl_projects", default: "background/taskbarl_projects1.png", 
+		pressed: "background/taskbarl_projects2.png", active: "background/taskbarl_projects3.png" },
+		"contact": { el: "taskbarl_contact", default: "background/taskbarl_contact1.png", 
+		pressed: "background/taskbarl_contact2.png", active: "background/taskbarl_contact3.png" },
+		"systemprop": { el: "taskbarl_systemprop", 
+		default: "background/taskbarl_systemprop1.png", 
+		pressed: "background/taskbarl_systemprop2.png", 
+		active: "background/taskbarl_systemprop3.png",
+		advDefault: "background/taskbarl_systempropADV1.png",
+		advPressed: "background/taskbarl_systempropADV2.png",
+		advActive:  "background/taskbarl_systempropADV3.png" },
+	};
+	
+	const winButton = {
+		"helpbutton": { parent: "aboutme", x: 600, y: 12, w: 32, h: 28,
+		default: "window/helpbutton.png", pressed: "window/helpbutton_press.png" },
+		"closebutton": { parent: "systemprop", x: 624, y: 12, w: 32, h: 28,
+		default: "window/closebutton.png", pressed: "window/closebutton_press.png" }
+	};
+	
+	const clockEl = document.getElementById("taskbarl_clock");
+	const clockImgs = {};
+	const clockIds = ["clockHour1","clockHour2","clockColon","clockMin1","clockMin2","clockAMPM"];
+	clockIds.forEach(id => {
+		const img = document.createElement("img");
+		img.id = "clock_" + id;
+		img.draggable = false;
+		img.style.position = "fixed";
+		img.style.zIndex = "13";
+		img.style.pointerEvents = "none";
+		img.style.imageRendering = "pixelated";
+		document.body.appendChild(img);
+	});
+
+	function clockImg(id) { return document.getElementById("clock_" + id); }
+
+	function pinClock() {
+		const bar = document.querySelector(".taskbarr");
+		const rect = bar.getBoundingClientRect();
+		const matrix = new DOMMatrix(getComputedStyle(bar).transform);
+		const scale = matrix.a || 1;
+
+		const now = new Date();
+		let hours = now.getHours();
+		const minutes = now.getMinutes();
+		const ampm = hours >= 12 ? "PM" : "AM";
+		hours = hours % 12 || 12;
+		const twoDigit = hours >= 10;
+
+		const coords = twoDigit ? {
+			clockHour1:   { x: 98,  y: 22, w: 10, h: 18 },
+			clockHour2:   { x: 110, y: 22, w: 10, h: 18 },
+			clockColon:  { x: 120, y: 22, w: 8,  h: 18 },
+			clockMin1:   { x: 128, y: 22, w: 10, h: 18 },
+			clockMin2:   { x: 140, y: 22, w: 10, h: 18 },
+			clockAMPM: { x: 156, y: 22, w: 30, h: 18 },
+		} : {
+			clockHour1:   { x: 104, y: 22, w: 10, h: 18 },
+			clockHour2:   null,
+			clockColon:  { x: 114, y: 22, w: 8,  h: 18 },
+			clockMin1:   { x: 122, y: 22, w: 10, h: 18 },
+			clockMin2:   { x: 134, y: 22, w: 10, h: 18 },
+			clockAMPM: { x: 150, y: 22, w: 30, h: 18 },
+		};
+
+		const hStr = hours.toString().padStart(2, '0');
+		const mStr = minutes.toString().padStart(2, '0');
+
+		const vals = {
+			clockHour1:   twoDigit ? `background/clock/${hStr[0]}.png` : `background/clock/${hStr[1]}.png`,
+			clockHour2:   twoDigit ? `background/clock/${hStr[1]}.png` : null,
+			clockColon:  "background/clock/colon.png",
+			clockMin1:   `background/clock/${mStr[0]}.png`,
+			clockMin2:   `background/clock/${mStr[1]}.png`,
+			clockAMPM: `background/clock/${ampm}.png`,
+		};
+
+		clockIds.forEach(id => {
+			const img = clockImg(id);
+			const coord = coords[id];
+			if (!coord) { img.style.display = "none"; return; }
+			img.src = vals[id];
+			img.style.display = "block";
+			img.style.left   = (rect.right - rect.width + coord.x * scale) + "px";
+			img.style.top    = (rect.top   + coord.y * scale) + "px";
+			img.style.width  = (coord.w * scale) + "px";
+			img.style.height = (coord.h * scale) + "px";
+		});
+	}
+
+	try {
+		const test = new Date();
+		if (isNaN(test.getTime())) throw new Error();
+		const blankBar = document.querySelector(".taskbarr");
+		const preload = new Image();
+		preload.onload = () => {
+			blankBar.src = "background/taskbarr_blank.png";
+			// wait one frame for the src swap to paint
+			requestAnimationFrame(() => {
+				pinClock();
+				setInterval(pinClock, 1000);
+			});
+		};
+		preload.src = "background/taskbarr_blank.png";
+		window.addEventListener("resize", pinClock);
+	} catch(e) {
+		clockIds.forEach(id => { clockImg(id).style.display = "none"; });
+	}
+	
+	if (typeof pinClock === 'function') pinClock();
+	
+	let dragWin = null;
+	let offset = { x: 0, y: 0 };
+	let topZ = 1000;
+	let advDiscovered = false;
+	let heldWinButton = null;
+
+	function initWindowPositions() {
+		const small = window.innerWidth < 1500 || window.innerHeight < 950;
+		const large = window.innerWidth >= 3000 && window.innerHeight >= 1900;
+		const scale = large ? 2 : small ? 0.5 : 1;
+
+		const positions = {
+			aboutme: { left: 323, top: 160 },
+			certs: { left: 401, top: 454 },
+			projects: { left: 979, top: 76 },
+			contact: { left: 979, top: 594 },
+			systemprop: { left: 20,  top: 20  },
+		};
+
+		Object.entries(positions).forEach(([id, pos]) => {
+			const el = document.getElementById(id);
+			el.style.position = "fixed";
+			el.style.margin = "0";
+			el.style.left = (pos.left * scale) + "px";
+			el.style.top = (pos.top  * scale) + "px";
+		});
+
+		setTimeout(pinButton, 0);
+	}
+
+	initWindowPositions();
+
+	// focused window stuff and taskbar button assoc.
+	function focus(focusedWin) {
+		Object.entries(taskbarButton).forEach(([id, btn]) => {
+			const buttonStuff = document.getElementById(btn.el);
+			if (!buttonStuff) return;
+			if (id === "systemprop" && advDiscovered) return;
+			buttonStuff.src = (focusedWin && focusedWin.id === id)
+				? btn.active
+				: btn.default;
+		});
+		Object.entries(titleBar).forEach(([btnId, data]) => {
+				const btn = document.getElementById(btnId);
+				if (!btn) return;
+				btn.src = (focusedWin && focusedWin.id === data.parent)
+					? data.active
+					: data.inactive;
+			});
+			if (advDiscovered) {
+				const btn = taskbarButton["systemprop"];
+				const spBtn = document.getElementById("taskbarl_systemprop");
+				const focused = focusedWin && focusedWin.id === "systemprop";
+				const visible = document.getElementById("systemprop").style.display !== "none";
+				const win = document.getElementById("systemprop");
+				const isAdv = win.src.includes("systemprop3.png") || win.src.includes("systemprop2.png");
+				if (isAdv) {
+					document.getElementById("titlebar_systemprop").src = focused
+						? "window/titlebar_systemprop2.png"
+						: "window/titlebar_systemprop2_inactive.png";
+					spBtn.src = (focused && visible) ? btn.advActive : btn.advDefault;
+				} else {
+					document.getElementById("titlebar_systemprop").src = focused
+						? titleBar["titlebar_systemprop"].active
+						: titleBar["titlebar_systemprop"].inactive;
+					spBtn.src = (focused && visible) ? btn.active : btn.default;
+				}
+			}
+		}
+	function nextFocus() {
+		let highestZ = -1;
+		let highestWin = null;
+		document.querySelectorAll(".wingroup").forEach(w => {
+			if (!windows.includes(w.id)) return;
+			if (w.style.display === "none") return;
+			const z = parseInt(w.style.zIndex) || 0;
+			if (z > highestZ) {
+				highestZ = z;
+				highestWin = w;
+			}
+		});
+		focus(highestWin);
+	}
+
+	// taskbar button behavior
+	// i hate my fucking life if you couldnt tell already
+	Object.entries(taskbarButton).forEach(([id, btn]) => {
+		const buttonStuff = document.getElementById(btn.el);
+		if (!buttonStuff) return;
+
+		buttonStuff.addEventListener("mousedown", () => {
+			if (id === "systemprop" && advDiscovered) {
+				const win = document.getElementById("systemprop");
+				if (win.src.includes("systemprop2.png") || win.src.includes("systemprop3.png")) {
+					if (buttonStuff.src.includes(btn.advDefault.split("/").pop())) {
+						heldWinButton = "taskbar_" + id;
+						buttonStuff.src = btn.advPressed;
+					}
+				}
+				return;
+			}
+			if (buttonStuff.src.includes(btn.default.split("/").pop())) {
+				heldWinButton = "taskbar_" + id;
+				buttonStuff.src = btn.pressed;
+			}
+		});
+
+		buttonStuff.addEventListener("mouseleave", () => {
+			if (heldWinButton !== "taskbar_" + id) return;
+			if (id === "systemprop" && advDiscovered) {
+				buttonStuff.src = btn.advDefault;
+				return;
+			}
+			buttonStuff.src = btn.default;
+		});
+
+		buttonStuff.addEventListener("mouseenter", () => {
+			if (heldWinButton !== "taskbar_" + id) return;
+			if (id === "systemprop" && advDiscovered) {
+				buttonStuff.src = btn.advPressed;
+				return;
+			}
+			buttonStuff.src = btn.pressed;
+		});
+
+		buttonStuff.addEventListener("mouseup", () => {
+			if (heldWinButton !== "taskbar_" + id) return;
+			heldWinButton = null;
+		});
+
+		buttonStuff.addEventListener("click", () => {
+			const win = document.getElementById(id);
+			const isAdv = id === "systemprop" && advDiscovered &&
+				(document.getElementById("systemprop").src.includes("systemprop2.png") ||
+				 document.getElementById("systemprop").src.includes("systemprop3.png"));
+			const isActive = isAdv
+				? buttonStuff.src.includes(btn.advActive.split("/").pop())
+				: buttonStuff.src.includes(btn.active.split("/").pop());
+			if (isActive) {
+				win.style.display = "none";
+				buttonStuff.src = isAdv ? btn.advDefault : btn.default;
+				pinButton();
+				advPinAll();
+				nextFocus();
+			} else {
+				win.style.display = "block";
+				win.style.zIndex = topZ += 10;
+				focus(win);
+				pinButton();
+				advPinAll();
+			}
+		});
+	});
+	
+	// rare edge case but whatever
+	document.getElementById("contact").style.zIndex   = 10;
+	document.getElementById("projects").style.zIndex  = 20;
+	document.getElementById("certs").style.zIndex     = 30;
+	document.getElementById("aboutme").style.zIndex   = 40;
+	document.getElementById("systemprop").style.zIndex = 50;
+	topZ = 50;
+	document.addEventListener("selectionchange", () => {
+		window.getSelection().removeAllRanges();
+	});
+	
+	// on init, only About Me active + fix buttons asap
+	focus(document.getElementById("aboutme"));
+	setTimeout(pinButton, 0);
+
+	// make buttons instead of changing entire window because it is harder but easier
+	function pinButton() {
+		Object.entries(titleBar).forEach(([btnId, data]) => {
+			const parent = document.getElementById(data.parent);
+			const btn = document.getElementById(btnId);
+			if (parent.style.display === "none") {
+				btn.style.display = "none";
+				return;
+			}
+			const rect = parent.getBoundingClientRect();
+			const scaleX = rect.width / parent.offsetWidth;
+			const scaleY = rect.height / parent.offsetHeight;
+			const parentZ = parseInt(parent.style.zIndex) || parseInt(getComputedStyle(parent).zIndex) || 0;
+			btn.style.display = "block";
+			btn.style.left   = (rect.left + data.x * scaleX) + "px";
+			btn.style.top    = (rect.top  + data.y * scaleY) + "px";
+			btn.style.width  = (data.w * scaleX) + "px";
+			btn.style.height = (data.h * scaleY) + "px";
+			btn.style.zIndex = parentZ + 1;
+		});
+		Object.entries(winButton).forEach(([btnId, data]) => {
+			const parent = document.getElementById(data.parent);
+			const btn = document.getElementById(btnId);
+			if (parent.style.display === "none") {
+				btn.style.display = "none";
+				return;
+			}
+			const rect = parent.getBoundingClientRect();
+			const scaleX = rect.width / parent.offsetWidth;
+			const scaleY = rect.height / parent.offsetHeight;
+			const parentZ = parseInt(parent.style.zIndex) || parseInt(getComputedStyle(parent).zIndex) || 0;
+			btn.style.display = "block";
+			btn.style.left   = (rect.left + data.x * scaleX) + "px";
+			btn.style.top    = (rect.top  + data.y * scaleY) + "px";
+			btn.style.width  = (data.w * scaleX) + "px";
+			btn.style.height = (data.h * scaleY) + "px";
+			btn.style.zIndex = parentZ + 2;
+		});
+	}
+	window.addEventListener("resize", pinButton);
+
+	document.getElementById("help").addEventListener("click", (e) => {
+		e.preventDefault();
+		const win = document.getElementById("systemprop");
+		win.style.display = "block";
+		win.style.zIndex = topZ += 10;
+		focus(win);
+		document.getElementById("taskbarl_systemprop").style.display = "block";
+		pinButton();
+	});
+
+	// button image switch for about me/sysprop yippee
+	document.getElementById("help").addEventListener("mousedown", () => {
+		heldWinButton = "helpbutton";
+		document.getElementById("helpbutton").src = winButton["helpbutton"].pressed;
+	});
+	document.getElementById("help").addEventListener("mouseleave", () => {
+		if (heldWinButton === "helpbutton")
+			document.getElementById("helpbutton").src = winButton["helpbutton"].default;
+	});
+	document.getElementById("help").addEventListener("mouseenter", () => {
+		if (heldWinButton === "helpbutton")
+			document.getElementById("helpbutton").src = winButton["helpbutton"].pressed;
+	});
+	document.getElementById("help").addEventListener("mouseup", () => {
+		document.getElementById("helpbutton").src = winButton["helpbutton"].default;
+	});
+
+	document.getElementById("close").addEventListener("mousedown", () => {
+		heldWinButton = "closebutton";
+		document.getElementById("closebutton").src = winButton["closebutton"].pressed;
+	});
+	document.getElementById("close").addEventListener("mouseleave", () => {
+		if (heldWinButton === "closebutton")
+			document.getElementById("closebutton").src = winButton["closebutton"].default;
+	});
+	document.getElementById("close").addEventListener("mouseenter", () => {
+		if (heldWinButton === "closebutton")
+			document.getElementById("closebutton").src = winButton["closebutton"].pressed;
+	});
+	document.getElementById("close").addEventListener("mouseup", () => {
+		document.getElementById("closebutton").src = winButton["closebutton"].default;
+	});
+
+	// sysprop tab behavior + Shush! stuff
+	document.getElementById("tab_details").addEventListener("mousedown", (e) => {
+		e.preventDefault();
+		document.getElementById("systemprop").src = "window/systemprop.png";
+		startButtonConst.src = "background/startbutton.png";
+		focus(document.getElementById("systemprop"));
+		pinButton();
+		advPinAll();
+	});
+	document.getElementById("tab_advanced").addEventListener("mousedown", (e) => {
+		e.preventDefault();
+		const win = document.getElementById("systemprop");
+		win.src = advDiscovered ? "window/systemprop3.png" : "window/systemprop2.png";
+		if (advDiscovered) startButtonConst.src = "background/startbutton2.png";
+		focus(document.getElementById("systemprop"));
+		pinButton();
+		advPinAll();
+	});
+	document.getElementById("close").addEventListener("click", (e) => {
+		e.preventDefault();
+		const win = document.getElementById("systemprop");
+		advDiscovered = false;
+		win.src = "window/systemprop.png";
+		win.style.display = "none";
+		win.style.left = "20px";
+		win.style.top = "20px";
+		win.style.position = "";
+		document.getElementById("taskbarl_systemprop").style.display = "none";
+		startButtonConst.src = "background/startbutton.png";
+		pinButton();
+		advPinAll();
+		nextFocus();
+	});
+
+	// start button secreet Shush!
+	function startbuttonActive() {
+		const win = document.getElementById("systemprop");
+		const tbBtn = document.getElementById("taskbarl_systemprop");
+		return win.style.display !== "none" &&
+			   win.src.includes("systemprop2.png") &&
+			   tbBtn.src.includes("taskbarl_systemprop3.png");
+	}
+	
+	const startButtonConst = document.getElementById("taskbarl_startbutton");
+	startButtonConst.addEventListener("mouseenter", () => {
+		if (advDiscovered) return;
+		if (!startbuttonActive()) return;
+		if (heldWinButton === "startbutton2") startButtonConst.src = "background/startbutton2_pressed.png";
+		else startButtonConst.src = "background/startbutton2.png";
+	});
+	startButtonConst.addEventListener("mouseleave", () => {
+		if (advDiscovered) return;
+		if (!startbuttonActive()) return;
+		startButtonConst.src = "background/startbutton.png";
+	});
+	startButtonConst.addEventListener("mousedown", () => {
+		if (advDiscovered) return;
+		if (!startbuttonActive()) return;
+		heldWinButton = "startbutton2";
+		startButtonConst.src = "background/startbutton2_pressed.png";
+	});
+	startButtonConst.addEventListener("mouseup", () => {
+		if (heldWinButton === "startbutton2") {
+			heldWinButton = null;
+			if (startbuttonActive()) startButtonConst.src = "background/startbutton2.png";
+			else startButtonConst.src = "background/startbutton.png";
+		}
+	});
+	startButtonConst.addEventListener("click", () => {
+		if (!startbuttonActive()) return;
+		advDiscovered = true;
+		document.getElementById("systemprop").src = "window/systemprop3.png";
+		document.getElementById("taskbarl_systemprop").src = taskbarButton["systemprop"].advActive;
+		startButtonConst.src = "background/startbutton2.png";
+		pinButton();
+		focus(document.getElementById("systemprop"));
+		advPinAll();
+	});
+
+	// Shush!
+	// so many fucking bugs why why wwhy whywhywhywhwywhywhfeywhafteuohathg4eo9thgoa9wthg89oh4t3eg89hg89rdhbua9o3tgu4er
+	const advRows = 8, advColumns = 8, advMines = 10;
+
+	// sprite coordinates at og dimensions doe (0 (0 ) < eyes emoji epic meme!
+	const advFace   = { x: 310, y: 120, w: 48, h: 48 };
+	const advCounters = [
+		{ x: 216, y: 120, w: 26, h: 46 }, // mine digit 1
+		{ x: 242, y: 120, w: 26, h: 46 }, // mine digit 2
+		{ x: 268, y: 120, w: 26, h: 46 }, // mine digit 3
+		{ x: 370, y: 120, w: 26, h: 46 }, // time digit 1
+		{ x: 396, y: 120, w: 26, h: 46 }, // time digit 2
+		{ x: 422, y: 120, w: 26, h: 46 }, // time digit 3
+	];
+	const advColumnX = [206,238,270,302,334,366,398,430];
+	const advRowY = [198,230,262,294,326,358,390,422];
+	const advTileW = 32, advTileH = 32;
+
+	let advBoard = [];
+	let advTime = 0;
+	let advTimerInterval = null;
+	let advLose = false;
+	let advWin = false;
+	let advStart = false;
+	let advFacePress = false;
+	let advHoldTile = null;
+	let advHoldButton = 0; // 0=lclick 1=mclick l and 1 look very similar in this font
+	let advShockArea = false;
+	let advHoldButtonRaw = false;
+
+	const advTiles = [];
+	const advTilesContainer = document.getElementById("ms_tiles");
+	for (let r = 0; r < advRows; r++) {
+		advTiles[r] = [];
+		for (let c = 0; c < advColumns; c++) {
+			const img = document.createElement("img");
+			img.id = `ms_tile_${r}_${c}`;
+			img.draggable = false;
+			img.style.position = "fixed";
+			img.style.zIndex = "9999";
+			img.style.pointerEvents = "none";
+			img.src = "window/advanced/tile_unclicked.png";
+			advTilesContainer.appendChild(img);
+			advTiles[r][c] = img;
+		}
+	}
+
+	function advCounterStuff(n) {
+		if (n === '-') return "window/advanced/counter_minus.png";
+		return `window/advanced/counter_${n}.png`;
+	}
+
+	function advSetCounter(flagsLeft) {
+		// restrict to -99 to 999
+		const val = Math.max(-99, Math.min(999, flagsLeft));
+		const s = Math.abs(val).toString().padStart(val < 0 ? 2 : 3, '0');
+		const d1 = document.getElementById("ms_c1");
+		const d2 = document.getElementById("ms_c2");
+		const d3 = document.getElementById("ms_c3");
+		if (val < 0) {
+			d1.src = advCounterStuff('-');
+			d2.src = advCounterStuff(parseInt(s[0]));
+			d3.src = advCounterStuff(parseInt(s[1]));
+		} else {
+			d1.src = advCounterStuff(parseInt(s[0]));
+			d2.src = advCounterStuff(parseInt(s[1]));
+			d3.src = advCounterStuff(parseInt(s[2]));
+		}
+	}
+
+	function advSetTimer(t) {
+		const s = Math.min(999, t).toString().padStart(3, '0');
+		document.getElementById("ms_t1").src = advCounterStuff(parseInt(s[0]));
+		document.getElementById("ms_t2").src = advCounterStuff(parseInt(s[1]));
+		document.getElementById("ms_t3").src = advCounterStuff(parseInt(s[2]));
+	}
+
+	function advFlagsPlaced() {
+		let f = 0;
+		for (let r = 0; r < advRows; r++)
+			for (let c = 0; c < advColumns; c++)
+				if (advBoard[r][c].state === 'flag') f++;
+		return f;
+	}
+
+	function advTileHighlight(r, c) {
+		if (!advHoldTile) return false;
+		if (advHoldButton === 1) {
+			return Math.abs(r - advHoldTile.r) <= 1 && Math.abs(c - advHoldTile.c) <= 1;
+		}
+		return advHoldTile.r === r && advHoldTile.c === c;
+	}
+	
+	function advTileStuff(r, c, forceReveal) {
+		const cell = advBoard[r][c];
+		if (forceReveal) {
+			if (cell.state === 'flag' && !cell.mine) return "window/advanced/tile_incorrectflag.png";
+			if (cell.mine && cell.state !== 'flag' && cell.state !== 'clicked') return "window/advanced/tile_mine.png";
+		}
+		switch (cell.state) {
+			case 'flag':   return "window/advanced/tile_flag.png";
+			case 'unsure': return advTileHighlight(r, c)
+				? "window/advanced/tile_unsureclick.png"
+				: "window/advanced/tile_unsure.png";
+			case 'clicked':
+				if (cell.mine) return "window/advanced/tile_mineclicked.png";
+				return cell.adjCount > 0 ? `window/advanced/tile_${cell.adjCount}.png` : "window/advanced/tile_clicked.png";
+			default: return advTileHighlight(r, c)
+				? "window/advanced/tile_clicked.png"
+				: "window/advanced/tile_unclicked.png";
+		}
+	}
+
+	function advTileRender(forceReveal) {
+		for (let r = 0; r < advRows; r++)
+			for (let c = 0; c < advColumns; c++)
+				advTiles[r][c].src = advTileStuff(r, c, forceReveal);
+	}
+
+	function advNewBoard() {
+		// clear timer
+		if (advTimerInterval) { clearInterval(advTimerInterval); advTimerInterval = null; }
+		advTime = 0; advLose = false; advWin = false; advStart = false;
+		advHoldTile = null; advFacePress = false;
+
+		// redo
+		advBoard = [];
+		for (let r = 0; r < advRows; r++) {
+			advBoard[r] = [];
+			for (let c = 0; c < advColumns; c++)
+				advBoard[r][c] = { mine: false, state: 'unclicked', adjCount: 0 };
+		}
+		advSetCounter(advMines);
+		advSetTimer(0);
+		document.getElementById("ms_face").src = "window/advanced/face_smile.png";
+		advTileRender(false);
+		advPinAll();
+		advHoldButton = 0;
+		advShockArea = false;
+	}
+	
+	function advInShockArea(e) {
+		const rect = systemPropWinEl.getBoundingClientRect();
+		const scaleX = rect.width / systemPropWinEl.offsetWidth;
+		const scaleY = rect.height / systemPropWinEl.offsetHeight;
+		const lx = (e.clientX - rect.left) / scaleX;
+		const ly = (e.clientY - rect.top) / scaleY;
+		return lx >= 16 && lx <= 647 && ly >= 96 && ly <= 469;
+	}
+	
+	// i will eat 39 boiled eggs if this doesnt work and probably have to go to the er?
+	// i dont know yet.
+	const systemPropWinEl = document.getElementById("systemprop");
+
+	systemPropWinEl.addEventListener("mousedown", (e) => {
+		if (!systemPropWinEl.src.includes("systemprop3.png")) return;
+		if (e.button !== 0 && e.button !== 1) return;
+
+		e.stopPropagation();
+
+		const titleBarArea = titleBar["titlebar_systemprop"];
+		const rect = systemPropWinEl.getBoundingClientRect();
+		const scaleX = rect.width / systemPropWinEl.offsetWidth;
+		const scaleY = rect.height / systemPropWinEl.offsetHeight;
+		const lx = (e.clientX - rect.left) / scaleX;
+		const ly = (e.clientY - rect.top) / scaleY;
+		if (lx >= titleBarArea.x && lx <= titleBarArea.x + titleBarArea.w &&
+			ly >= titleBarArea.y && ly <= titleBarArea.y + titleBarArea.h) {
+			systemPropWinEl.style.zIndex = topZ += 10;
+			focus(systemPropWinEl);
+			advPinAll();
+			dragWin = systemPropWinEl;
+			offset.x = e.clientX - rect.left;
+			offset.y = e.clientY - rect.top;
+			e.preventDefault();
+			return;
+		}
+
+		if (advFaceClick(e)) {
+			advFacePress = true;
+			advShockArea = false;
+			document.getElementById("ms_face").src = "window/advanced/face_press.png";
+			return;
+		}
+
+		if (advInShockArea(e)) {
+			if (!advLose && !advWin) {
+				advShockArea = true;
+				advHoldButtonRaw = true;
+				document.getElementById("ms_face").src = "window/advanced/face_shock.png";
+				const tile = advGetTile(e);
+				if (tile) {
+					advHoldTile = tile;
+					advHoldButton = e.button;
+					advTileRender(false);
+				}
+			}
+		}
+	});
+	
+	systemPropWinEl.addEventListener("mouseup", (e) => {
+		if (!systemPropWinEl.src.includes("systemprop3.png")) return;
+		advShockArea = false;
+		advHoldButtonRaw = false;
+
+		if (advFacePress) {
+			advFacePress = false;
+			if (advFaceClick(e)) advNewBoard();
+			else document.getElementById("ms_face").src = advWin ? "window/advanced/face_cool.png"
+				: advLose ? "window/advanced/face_die.png" : "window/advanced/face_smile.png";
+			return;
+		}
+		if (advHoldTile) {
+			if (!advLose && !advWin)
+				document.getElementById("ms_face").src = "window/advanced/face_smile.png";
+			const tile = advGetTile(e);
+			if (tile) {
+				if (e.button === 0) advHandleLClick(tile.r, tile.c);
+				else if (e.button === 1) advHandleMClick(tile.r, tile.c);
+			}
+			advHoldTile = null;
+			advHoldButton = 0;
+			advTileRender(advLose);
+			advPinAll();
+		} else if (!advLose && !advWin) {
+			document.getElementById("ms_face").src = "window/advanced/face_smile.png";
+		}
+	});
+	
+	systemPropWinEl.addEventListener("mouseleave", () => {
+		advHoldTile = null;
+		advHoldButton = 0;
+		if (!advHoldButtonRaw && !advLose && !advWin)
+			document.getElementById("ms_face").src = "window/advanced/face_smile.png";
+		advTileRender(advLose);
+		advPinAll();
+	});
+
+	function advSeedMines(safeR, safeC) {
+		const safe = new Set();
+		for (let dr = -1; dr <= 1; dr++)
+			for (let dc = -1; dc <= 1; dc++) {
+				const nr = safeR + dr, nc = safeC + dc;
+				if (nr >= 0 && nr < advRows && nc >= 0 && nc < advColumns)
+					safe.add(nr * advColumns + nc);
+			}
+		let placed = 0;
+		while (placed < advMines) {
+			const r = Math.floor(Math.random() * advRows);
+			const c = Math.floor(Math.random() * advColumns);
+			if (!advBoard[r][c].mine && !safe.has(r * advColumns + c)) {
+				advBoard[r][c].mine = true;
+				placed++;
+			}
+		}
+		for (let r = 0; r < advRows; r++)
+			for (let c = 0; c < advColumns; c++) {
+				if (advBoard[r][c].mine) continue;
+				let count = 0;
+				for (let dr = -1; dr <= 1; dr++)
+					for (let dc = -1; dc <= 1; dc++) {
+						const nr = r+dr, nc = c+dc;
+						if (nr >= 0 && nr < advRows && nc >= 0 && nc < advColumns && advBoard[nr][nc].mine) count++;
+					}
+				advBoard[r][c].adjCount = count;
+			}
+	}
+
+	function advReveal(r, c) {
+		const cell = advBoard[r][c];
+		if (cell.state !== 'unclicked' && cell.state !== 'unsure') return;
+		cell.state = 'clicked';
+		if (cell.adjCount === 0 && !cell.mine) {
+			for (let dr = -1; dr <= 1; dr++)
+				for (let dc = -1; dc <= 1; dc++) {
+					const nr = r+dr, nc = c+dc;
+					if (nr >= 0 && nr < advRows && nc >= 0 && nc < advColumns)
+						advReveal(nr, nc);
+				}
+		}
+	}
+
+	function advWinCheck() {
+		for (let r = 0; r < advRows; r++)
+			for (let c = 0; c < advColumns; c++) {
+				const cell = advBoard[r][c];
+				if (!cell.mine && cell.state !== 'clicked') return false;
+			}
+		return true;
+	}
+
+	function advHandleLClick(r, c) {
+		if (advLose || advWin) return;
+		const cell = advBoard[r][c];
+		if (cell.state === 'flag') return;
+
+		if (!advStart) {
+			advSeedMines(r, c);
+			advStart = true;
+			advTimerInterval = setInterval(() => {
+				if (advTime < 999) { advTime++; advSetTimer(advTime); }
+			}, 1000);
+		}
+
+		if (cell.mine) {
+			cell.state = 'clicked';
+			advLose = true;
+			clearInterval(advTimerInterval); advTimerInterval = null;
+			document.getElementById("ms_face").src = "window/advanced/face_die.png";
+			advTileRender(true);
+			advPinAll();
+			return;
+		}
+
+		advReveal(r, c);
+
+		if (advWinCheck()) {
+			advWin = true;
+			clearInterval(advTimerInterval); advTimerInterval = null;
+			document.getElementById("ms_face").src = "window/advanced/face_cool.png";
+			// flag remaining mines after win
+			for (let rr = 0; rr < advRows; rr++)
+				for (let cc = 0; cc < advColumns; cc++)
+					if (advBoard[rr][cc].mine) advBoard[rr][cc].state = 'flag';
+			advSetCounter(0);
+		}
+
+		advTileRender(false);
+		advPinAll();
+	}
+
+	function advHandleRClick(r, c) {
+		if (advLose || advWin || !advStart) return;
+		const cell = advBoard[r][c];
+		if (cell.state === 'clicked') return;
+		if (cell.state === 'unclicked') cell.state = 'flag';
+		else if (cell.state === 'flag')   cell.state = 'unsure';
+		else if (cell.state === 'unsure') cell.state = 'unclicked';
+		advSetCounter(advMines - advFlagsPlaced());
+		advTileRender(false);
+		advPinAll();
+	}
+
+	function advHandleMClick(r, c) {
+		if (advLose || advWin || !advStart) return;
+		const cell = advBoard[r][c];
+		if (cell.state !== 'clicked' || cell.adjCount === 0) return;
+
+		let flagCount = 0;
+		for (let dr = -1; dr <= 1; dr++)
+			for (let dc = -1; dc <= 1; dc++) {
+				const nr = r+dr, nc = c+dc;
+				if (nr >= 0 && nr < advRows && nc >= 0 && nc < advColumns)
+					if (advBoard[nr][nc].state === 'flag') flagCount++;
+			}
+		if (flagCount !== cell.adjCount) return;
+		for (let dr = -1; dr <= 1; dr++)
+			for (let dc = -1; dc <= 1; dc++) {
+				const nr = r+dr, nc = c+dc;
+				if (nr < 0 || nr >= advRows || nc < 0 || nc >= advColumns) continue;
+				const neighbor = advBoard[nr][nc];
+				if (neighbor.state === 'flag' || neighbor.state === 'clicked') continue;
+				if (neighbor.mine) {
+					neighbor.state = 'clicked';
+					advLose = true;
+					clearInterval(advTimerInterval); advTimerInterval = null;
+					document.getElementById("ms_face").src = "window/advanced/face_die.png";
+					advTileRender(true);
+					advPinAll();
+					return;
+				}
+				advReveal(nr, nc);
+			}
+
+		if (!advLose && advWinCheck()) {
+			advWin = true;
+			clearInterval(advTimerInterval); advTimerInterval = null;
+			document.getElementById("ms_face").src = "window/advanced/face_cool.png";
+			for (let rr = 0; rr < advRows; rr++)
+				for (let cc = 0; cc < advColumns; cc++)
+					if (advBoard[rr][cc].mine) advBoard[rr][cc].state = 'flag';
+			advSetCounter(0);
+		}
+
+		advTileRender(advLose);
+		advPinAll();
+	}
+	
+	function advPinAll() {
+		const win = document.getElementById("systemprop");
+		const visible = win.style.display !== "none" && win.src.includes("systemprop3.png");
+		const allEls = [
+			document.getElementById("ms_face"),
+			document.getElementById("ms_c1"), document.getElementById("ms_c2"), document.getElementById("ms_c3"),
+			document.getElementById("ms_t1"), document.getElementById("ms_t2"), document.getElementById("ms_t3"),
+			...advTiles.flat()
+		];
+		if (!visible) {
+			allEls.forEach(el => el.style.display = "none");
+			return;
+		}
+		const rect = win.getBoundingClientRect();
+		const scaleX = rect.width  / win.offsetWidth;
+		const scaleY = rect.height / win.offsetHeight;
+		const winZ = parseInt(win.style.zIndex) || 0;
+
+		function pinEl(el, coord) {
+			el.style.display = "block";
+			el.style.left   = (rect.left + coord.x * scaleX) + "px";
+			el.style.top    = (rect.top  + coord.y * scaleY) + "px";
+			el.style.width  = (coord.w * scaleX) + "px";
+			el.style.height = (coord.h * scaleY) + "px";
+			el.style.zIndex = winZ + 1;
+		}
+
+		pinEl(document.getElementById("ms_face"), advFace);
+		advCounters.forEach((coord, i) => {
+			const ids = ["ms_c1","ms_c2","ms_c3","ms_t1","ms_t2","ms_t3"];
+			pinEl(document.getElementById(ids[i]), coord);
+		});
+		for (let r = 0; r < advRows; r++)
+			for (let c = 0; c < advColumns; c++)
+				pinEl(advTiles[r][c], { x: advColumnX[c], y: advRowY[r], w: advTileW, h: advTileH });
+	}
+
+	window.addEventListener("resize", advPinAll);
+
+	function advGetTile(e) {
+		const win = document.getElementById("systemprop");
+		const rect = win.getBoundingClientRect();
+		const scaleX = rect.width / win.offsetWidth;
+		const scaleY = rect.height / win.offsetHeight;
+		const lx = (e.clientX - rect.left) / scaleX;
+		const ly = (e.clientY - rect.top)  / scaleY;
+		for (let r = 0; r < advRows; r++)
+			for (let c = 0; c < advColumns; c++) {
+				const tx = advColumnX[c], ty = advRowY[r];
+				if (lx >= tx && lx < tx + advTileW && ly >= ty && ly < ty + advTileH)
+					return { r, c };
+			}
+		return null;
+	}
+
+	function advFaceClick(e) {
+		const win = document.getElementById("systemprop");
+		const rect = win.getBoundingClientRect();
+		const scaleX = rect.width / win.offsetWidth;
+		const scaleY = rect.height / win.offsetHeight;
+		const lx = (e.clientX - rect.left) / scaleX;
+		const ly = (e.clientY - rect.top)  / scaleY;
+		return lx >= advFace.x && lx < advFace.x + advFace.w &&
+			   ly >= advFace.y && ly < advFace.y + advFace.h;
+	}
+
+	// no right click because i said so (except on adv)
+	document.addEventListener("contextmenu", (e) => {
+		const win = document.getElementById("systemprop");
+		if (win.style.display === "none" || !win.src.includes("systemprop3.png")) return;
+		if (e.target !== win) return;
+		const tile = advGetTile(e);
+		if (tile) advHandleRClick(tile.r, tile.c);
+	});
+
+	// init
+	advNewBoard();
+
+	// mouse interaction (moving windows, buttons, etc)
+	document.addEventListener("mousedown", (e) => {
+		if (e.button !== 0) return;
+		if (e.target.tagName === "AREA") return;
+		if (!e.target.classList.contains("wingroup")) return;
+
+		const el = e.target;
+		const sp = document.getElementById("systemprop");
+		const gameActive = el.id === "systemprop" && sp.src.includes("systemprop3.png") && !advLose && !advWin;
+		if (!gameActive) {
+			el.style.zIndex = topZ += 10;
+			focus(el);
+		}
+
+		const titleBarArea = titleBar["titlebar_" + el.id];
+		if (!titleBarArea) return;
+
+		const rect = el.getBoundingClientRect();
+		const scaleX = rect.width / el.offsetWidth;
+		const scaleY = rect.height / el.offsetHeight;
+		const localX = (e.clientX - rect.left) / scaleX;
+		const localY = (e.clientY - rect.top) / scaleY;
+
+		if (localX < titleBarArea.x || localX > titleBarArea.x + titleBarArea.w ||
+			localY < titleBarArea.y || localY > titleBarArea.y + titleBarArea.h) return;
+
+		if (gameActive) {
+			el.style.zIndex = topZ += 10;
+			focus(el);
+			advPinAll();
+		}
+
+		dragWin = el;
+		offset.x = e.clientX - rect.left;
+		offset.y = e.clientY - rect.top;
+		e.preventDefault();
+	});
+
+	// sticky windows so no butter no slip slide happy!
+	document.addEventListener("mousemove", (e) => {
+		if (dragWin) {
+			dragWin.style.position = "fixed";
+			dragWin.style.margin = "0";
+			dragWin.style.transformOrigin = "top left";
+			dragWin.style.left = (e.clientX - offset.x) + "px";
+			dragWin.style.top  = (e.clientY - offset.y) + "px";
+			pinButton();
+			advPinAll();
+		}
+		if (advShockArea && !advLose && !advWin) {
+			const tile = advGetTile(e);
+			advHoldTile = tile || null;
+			document.getElementById("ms_face").src = advHoldButtonRaw
+				? "window/advanced/face_shock.png"
+				: "window/advanced/face_smile.png";
+			advTileRender(false);
+			advPinAll();
+		}
+		if (advFacePress) {
+			document.getElementById("ms_face").src = advFaceClick(e)
+				? "window/advanced/face_press.png"
+				: (advWin ? "window/advanced/face_cool.png"
+				: advLose ? "window/advanced/face_die.png"
+				: "window/advanced/face_smile.png");
+		}
+	});
+	
+	// GoodBye
+	document.addEventListener("mouseup", (e) => {
+		heldWinButton = null;
+		advHoldButtonRaw = false;
+		if (advShockArea) {
+			advShockArea = false;
+			advHoldTile = null;
+			advHoldButton = 0;
+			if (!advLose && !advWin)
+				document.getElementById("ms_face").src = "window/advanced/face_smile.png";
+			advTileRender(false);
+			advPinAll();
+		}
+		dragWin = null;
+	});
+</script>
+
+<!-- integer scaling because theres nothing for this natively somehow -->
+<!-- im so fucking good at everything ever and im really tired also -->
+
+<!-- also windows 10 automatically scales everything good at 4k so im going -->
+<!-- to assume it will look and function like how it's supposed to literally
+<!-- everywhere -->
+<style>
+/* 100% scale */
+	@media screen and (max-width: 1499px), screen and (max-height: 949px) {
+    .wingroup, .deskico, .taskbarall img {
+        transform: scale(0.5);
+        transform-origin: top left;
+    }
+	.taskbars {
+        transform-origin: bottom;
+        bottom: 0;
+		margin-bottom: -28px;
+        width: 200%;
+    }
+	.taskbarl {
+        transform-origin: bottom left;
+        bottom: 0;
+		margin-bottom: -28px;
+    }
+    .taskbarr {
+        transform-origin: bottom right;
+		bottom: 0;
+		margin-bottom: -28px;
+		margin-right: -104px;
+    }
+	.taskbarl_buttons {
+		transform-origin: bottom left;
+		bottom: 0;
+		margin-bottom: -24px;
+	}
+	#taskbarl_startbutton {
+		margin-left: -2px;
+	}
+	#taskbarl_aboutme {
+		margin-left: -153px;
+    }
+	#taskbarl_certs {
+		margin-left: -251px;
+    }
+	#taskbarl_projects {
+		margin-left: -349px;
+	}
+	#taskbarl_contact {
+		margin-left: -447px;
+	}
+	#taskbarl_systemprop {
+		margin-left: -545px;
+	}
+		/* cursor stuff */
+		html, body, * {
+			cursor: url("cur/98.png"), default;
+		}
+		#aboutme, .wingroup {
+			cursor: url("cur/98.png"), move;
+		}
+		map[name="contact"] area {
+			cursor: url("cur/98pointer.png"), pointer;
+		}
+}
+/* 400% scale */
+	@media screen and (min-width: 2999px) and (min-height: 1899px) {
+    .wingroup, .deskico, .taskbarall img {
+        transform: scale(2);
+        transform-origin: top left;
+    }
+	.taskbars {
+        transform-origin: bottom;
+        bottom: 0;
+		margin-bottom: 56px;
+        width: 200%;
+    }
+	.taskbarl {
+        transform-origin: bottom left;
+        bottom: 0;
+		margin-bottom: 56px;
+    }
+    .taskbarr {
+        transform-origin: bottom right;
+		bottom: 0;
+		margin-bottom: 56px;
+		margin-right: 208px;
+    }
+	.taskbarl_buttons {
+		transform-origin: bottom left;
+		bottom: 0;
+		margin-bottom: 48px;
+	}
+	#taskbarl_startbutton {
+		margin-left: 4px;
+	}
+	#taskbarl_aboutme {
+		margin-left: 306px;
+    }
+	#taskbarl_certs {
+		margin-left: 502px;
+    }
+	#taskbarl_projects {
+		margin-left: 698px;
+	}
+	#taskbarl_contact {
+		margin-left: 894px;
+	}
+	#taskbarl_systemprop {
+        transform-origin: bottom left;
+        bottom: 0;
+		margin-bottom: 4px;
+		margin-left: 1090px;
+	}
+		/* cursor stuff */
+		html, body, * {
+			cursor: url("cur/98_4x.png"), default;
+		}
+		#aboutme, .wingroup {
+			cursor: url("cur/98_4x.png"), move;
+		}
+		map[name="contact"] area {
+			cursor: url("cur/98pointer_4x.png"), pointer;
+		}
+} 
+</style>
 </body>
 
+<!-- redirect for mobile users because i am not optimizing this shit -->
+<!-- and it is easier to just make a whole separate webpage -->
+<!-- LAWL! -->
+<script type="text/javascript">
+    (function() {
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+		//	|| window.innerWidth <= 768;
+        if (isMobile) {
+            window.location.href = "index_m.html";
+        }
+    })();
+</script>
+
+<!-- load absolutely everything before showing website -->
+<!-- cuz i am a bich -->
+<!-- I WARNED YOU ABOUT DIAL-UP BRO!!!! -->
+<!-- I TOLD YOU DOG! -->
+<script type="text/javascript">
+const loader = document.getElementById('loader');
+const allImg = [...document.querySelectorAll('img'), ...advTiles.flat()];
+let left = allImg.length;
+	function imgDone() {
+		if (--left <= 0) {
+			if (loader) loader.remove();
+		}
+	}
+
+if (left === 0) {
+    if (loader) loader.remove();
+} else {
+    allImg.forEach(img => {
+        if (img.complete && img.naturalWidth !== 0) {
+            imgDone();
+        } else {
+            img.addEventListener('load', imgDone);
+            img.addEventListener('error', imgDone);
+        }
+    });
+}
+</script>
+
+</html>
