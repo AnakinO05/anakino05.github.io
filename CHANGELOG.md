@@ -47,6 +47,7 @@ mainly just making the github page a little nicer!
 
 ### Notes
 this is **The Big One**
+
 unfortunately the cursor stuff is not as immersive as i wanted it to be, at least over 1x scale. browsers don't let any cursor bigger than 32x32 escape the window, so sometimes it may revert back to default when it's over 1x scale.
 
 ## v1.0
