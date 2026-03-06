@@ -1101,6 +1101,7 @@
 
 	// no right click because i said so (except on adv)
 	document.addEventListener("contextmenu", (e) => {
+		e.preventDefault();
 		const win = document.getElementById("systemprop");
 		if (win.style.display === "none" || !win.src.includes("systemprop3.png")) return;
 		if (e.target !== win) return;
