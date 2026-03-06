@@ -17,6 +17,12 @@
 	align-items: center;
 	font-family: sans-serif;
 	color: white;
+	visibility: visible !important;
+}
+#titlebar_aboutme, #titlebar_contact, #titlebar_projects, #titlebar_certs,
+#titlebar_systemprop, #helpbutton, #closebutton,
+#ms_face, #ms_c1, #ms_c2, #ms_c3, #ms_t1, #ms_t2, #ms_t3 {
+    visibility: hidden !important;
 }
 </style>
     <style>
@@ -179,6 +185,13 @@
 </div>
 
 <script type="text/javascript">
+	// Uh sir I believe there's a little bit of html/css in your javascript
+	// Oh thank you I hadn't noticed!
+	
+	// if i changed the extension from .html to .js and changed nothing else this would
+	// probably function identically
+	// (joke)
+
     // more disable scrolling stuff
 	window.scrollTo(0, 0);
 	
@@ -233,6 +246,7 @@
 		img.style.zIndex = "13";
 		img.style.pointerEvents = "none";
 		img.style.imageRendering = "pixelated";
+		img.style.visibility = "hidden";
 		document.body.appendChild(img);
 	});
 
@@ -1341,27 +1355,78 @@
 <!-- I WARNED YOU ABOUT DIAL-UP BRO!!!! -->
 <!-- I TOLD YOU DOG! -->
 <script type="text/javascript">
-const loader = document.getElementById('loader');
-const allImg = [...document.querySelectorAll('img'), ...advTiles.flat()];
-let left = allImg.length;
-	function imgDone() {
-		if (--left <= 0) {
-			if (loader) loader.remove();
-		}
-	}
+const preloadAll = [
+    "background/taskbar.png", "background/taskbarl.png", "background/taskbarr.png",
+    "background/taskbarr_blank.png",
+    "background/startbutton.png", "background/startbutton2.png", "background/startbutton2_pressed.png",
+    "background/taskbarl_aboutme1.png", "background/taskbarl_aboutme2.png", "background/taskbarl_aboutme3.png",
+    "background/taskbarl_certs1.png", "background/taskbarl_certs2.png", "background/taskbarl_certs3.png",
+    "background/taskbarl_projects1.png", "background/taskbarl_projects2.png", "background/taskbarl_projects3.png",
+    "background/taskbarl_contact1.png", "background/taskbarl_contact2.png", "background/taskbarl_contact3.png",
+    "background/taskbarl_systemprop1.png", "background/taskbarl_systemprop2.png", "background/taskbarl_systemprop3.png",
+    "background/taskbarl_systempropADV1.png", "background/taskbarl_systempropADV2.png", "background/taskbarl_systempropADV3.png",
 
-if (left === 0) {
-    if (loader) loader.remove();
-} else {
-    allImg.forEach(img => {
-        if (img.complete && img.naturalWidth !== 0) {
-            imgDone();
-        } else {
-            img.addEventListener('load', imgDone);
-            img.addEventListener('error', imgDone);
-        }
-    });
+    "background/deskico.png",
+
+    "window/aboutme.png", "window/contact.png", "window/projects.png", "window/certs.png",
+    "window/systemprop.png", "window/systemprop2.png", "window/systemprop3.png",
+
+    "window/titlebar_aboutme.png", "window/titlebar_aboutme_inactive.png",
+    "window/titlebar_contact.png", "window/titlebar_contact_inactive.png",
+    "window/titlebar_projects.png", "window/titlebar_projects_inactive.png",
+    "window/titlebar_certs.png", "window/titlebar_certs_inactive.png",
+    "window/titlebar_systemprop.png", "window/titlebar_systemprop_inactive.png",
+    "window/titlebar_systemprop2.png", "window/titlebar_systemprop2_inactive.png",
+
+    "window/helpbutton.png", "window/helpbutton_press.png",
+    "window/closebutton.png", "window/closebutton_press.png",
+
+    "window/advanced/face_smile.png", "window/advanced/face_shock.png", "window/advanced/face_press.png",
+    "window/advanced/face_die.png", "window/advanced/face_cool.png",
+    "window/advanced/tile_unclicked.png", "window/advanced/tile_clicked.png",
+    "window/advanced/tile_flag.png", "window/advanced/tile_unsure.png", "window/advanced/tile_unsureclick.png",
+    "window/advanced/tile_mine.png", "window/advanced/tile_mineclicked.png", "window/advanced/tile_incorrectflag.png",
+    "window/advanced/tile_1.png", "window/advanced/tile_2.png", "window/advanced/tile_3.png",
+    "window/advanced/tile_4.png", "window/advanced/tile_5.png", "window/advanced/tile_6.png",
+    "window/advanced/tile_7.png", "window/advanced/tile_8.png",
+    "window/advanced/counter_0.png", "window/advanced/counter_1.png", "window/advanced/counter_2.png",
+    "window/advanced/counter_3.png", "window/advanced/counter_4.png", "window/advanced/counter_5.png",
+    "window/advanced/counter_6.png", "window/advanced/counter_7.png", "window/advanced/counter_8.png",
+    "window/advanced/counter_9.png", "window/advanced/counter_minus.png",
+
+    "background/clock/0.png", "background/clock/1.png", "background/clock/2.png",
+    "background/clock/3.png", "background/clock/4.png", "background/clock/5.png",
+    "background/clock/6.png", "background/clock/7.png", "background/clock/8.png",
+    "background/clock/9.png", "background/clock/colon.png",
+    "background/clock/AM.png", "background/clock/PM.png",
+];
+const loader = document.getElementById('loader');
+let left = preloadAll.length;
+function imgDone() {
+    if (--left <= 0) {
+        initWindowPositions();
+        pinButton();
+        advPinAll();
+        pinClock();
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                document.querySelectorAll(
+                    "#titlebar_aboutme, #titlebar_contact, #titlebar_projects, #titlebar_certs, " +
+                    "#titlebar_systemprop, #helpbutton, #closebutton, " +
+                    "#ms_face, #ms_c1, #ms_c2, #ms_c3, #ms_t1, #ms_t2, #ms_t3"
+                ).forEach(el => el.style.visibility = "visible");
+                clockIds.forEach(id => { clockImg(id).style.visibility = "visible"; });
+                if (loader) loader.remove();
+            });
+        });
+    }
 }
+preloadAll.forEach(src => {
+    const img = new Image();
+    img.onload = imgDone;
+    img.onerror = imgDone;
+    img.src = src;
+});
 </script>
 
 </html>
