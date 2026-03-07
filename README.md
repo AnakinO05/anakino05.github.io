@@ -8,7 +8,7 @@ v1 was made to win, v1.1 was made to prove a point
 - interactive buttons on windows and the taskbar
 - clock that matches the user's time
 - integer scaling based on window size
-- qindows respond to being focused and unfocused, as well as retaining their focus order
+- windows respond to being focused and unfocused, as well as retaining their focus order
 - js re-implementation of a certain windows application
 - and more im sure im forgetting to mention
 
